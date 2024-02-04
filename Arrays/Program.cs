@@ -12,9 +12,11 @@ internal class Program
         int[] array1 = new int[8] { 0, 1, 1, 2, 3, 5, 8, 13 };
         Console.WriteLine("Arrray1:");
         Console.WriteLine("--------------");
+        var s = "";
         foreach (var n in array1)
-            Console.WriteLine(n);
-
+            s = s + "[" + Convert.ToString(n) + "]";
+        Console.WriteLine(s);
+        
         //create and display an array of month names using a loop
         string[] array2 = new string[12];
         for (var i = 0; i<array2.Length; i++)
@@ -26,8 +28,10 @@ internal class Program
         Console.WriteLine("Arrray2:");
         Console.WriteLine("--------------");
 
+        s = "";
         foreach (var n in array2)
-            Console.WriteLine(n);
+            s = s + "[" + n + "]";
+        Console.WriteLine(s);
 
         //create and display an array of numbers
         double[,] array3 = new double[3, 3];
@@ -36,57 +40,85 @@ internal class Program
         Console.WriteLine("Arrray3:");
         Console.WriteLine("--------------");
 
-        for (var i = 0; i < 3; i++)
+        for (var i = 0; i < array3.GetLength(0); i++)
         {
-            for (var j = 0; j < 3; j++)
+            for (var j = 0; j < array3.GetLength(1); j++)
             {
                 array3[i, j] = Math.Pow(i+2,j+1);
             }
         }
 
-        for (var i=0; i<3; i++)
+        for (var i=0; i< array3.GetLength(0); i++)
         {
-            var s = "";
-            for (var j = 0; j < 3; j++)
+            s = "";
+            for (var j = 0; j < array3.GetLength(1); j++)
             {
                 s = s + "[" + Convert.ToString(array3[j, i]) + "]";
             }
             Console.WriteLine(s);
         }
-       
 
-        //int[] array1 = new int[5] {1,2,3,4,5};
+        // create and display jagged array
+        double[][] array4 = new double[3][]
+        {
+            new double [] { 1, 2, 3, 4, 5 },
+            new double [] { Math.E, Math.PI },
+            new double [] { Math.Log10(1), Math.Log10(10), Math.Log10(100), Math.Log10(1000) }
+        };
 
-        //array1[1] = 5;
-        //Console.WriteLine(array1[1]);
+        Console.WriteLine("");
+        Console.WriteLine("Arrray4:");
+        Console.WriteLine("--------------");
 
-        //int[][] array2 = new int[3][] { new[] { 1, 2, 3, 56 }, new[] { 4, 5, 6, 78, 90 }, new[] { 7, 8, 9 } };
+        for (var i=0; i< array4.GetLength(0); i++)
+        {
+            s = "";
+            foreach (var n in array4[i])
+                s = s + "[" + n + "]";
+            Console.WriteLine(s);
+        }
 
-        //Console.WriteLine(array2[0]);
+        //create, copy, resize and display two arrays
 
-        //var array3 = Array.CreateInstance(typeof(int), 10);
+        //create
+        int[] array5 = { 1, 2, 3, 4, 5 };
+        int[] array6 = { 7, 8, 9, 10, 11, 12, 13 };
 
-        //int[] testarray = new[] { 3, 2, 1 };
-        //Array.Sort(testarray, 0, 3);
-        //Array.Reverse(testarray);
+        //display arrays before operations
+        Console.WriteLine("");
+        Console.WriteLine("Arrray5 and Array6 (before):");
+        Console.WriteLine("--------------");
 
-        //Console.WriteLine(testarray[0]);
-        //Console.WriteLine(testarray[1]);
-        //Console.WriteLine(testarray[2]);
+        s = "";
+        foreach (var n in array5)
+            s = s + "[" + n + "]";
+        Console.WriteLine(s);
 
-        //int[] array1 = new[] { 32, 111, 25, 17 };
-        //float[] array2 = new[] { 12.22f, 13f, 15.87f, 25.44f };
+        s = "";
+        foreach (var n in array6)
+            s = s + "[" + n + "]";
+        Console.WriteLine(s);
 
-        //var results = Array.CreateInstance(typeof(float),4);
-        //results.SetValue(array1[0] * array2[0], 0);
-        //results.SetValue(array1[0] / array2[0], 1);
+        //copy
+        Array.Copy(array5, array6, 3);
 
-        //Console.WriteLine(results.GetValue(0));
-        //Console.WriteLine(results.GetValue(1));
+        //resize
+        Array.Resize(ref array5, array5.GetLength(0) * 2);
 
-        //Array.Sort(array2);
-        //Console.WriteLine(array2[0]);
-        //Console.WriteLine(array2.Max());
-        //Console.WriteLine(array2.Min());
+
+        //display result
+        Console.WriteLine("");
+        Console.WriteLine("Arrray5 and Array6 (after):");
+        Console.WriteLine("--------------");
+
+        s = "";
+        foreach (var n in array5)
+            s = s + "[" + n + "]";
+        Console.WriteLine(s);
+
+        s = "";
+        foreach (var n in array6)
+            s = s + "[" + n + "]";
+        Console.WriteLine(s);
     }
 }
